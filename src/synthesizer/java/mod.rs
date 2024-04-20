@@ -328,7 +328,6 @@ impl<'a> Java<'a> {
             extra_line = true;
         }
 
-
         // Java high level stack resources uses `RemovalPolicy`, which is a higher level
         // enum compared to CfnDeletionPolicy, like other languages. Below is the captured
         // differences between RemovalPolicy and CfnDeletionPolicy. To see the difference:
@@ -343,14 +342,14 @@ impl<'a> Java<'a> {
                         trailer
                     ));
                     extra_line = true;
-                },
+                }
                 DeletionPolicy::RetainExceptOnCreate => {
                     writer.text(format!(
                         "{res_name}.applyRemovalPolicy(RemovalPolicy.RETAIN_ON_UPDATE_OR_DELETE){}",
                         trailer
                     ));
                     extra_line = true;
-                },
+                }
                 _ => {
                     writer.text(format!(
                         "{res_name}.applyRemovalPolicy(RemovalPolicy.{deletion_policy}){}",
